@@ -1,8 +1,9 @@
 require File.join(File.dirname(__FILE__), 'number')
+require_relative 'variable'
 
-Machine = Struct.new(:expression) do
+Machine = Struct.new(:expression, :environment) do
   def step
-    self.expression = expression.reduce
+    self.expression = expression.reduce(environment)
   end
 
   def run
@@ -15,8 +16,6 @@ Machine = Struct.new(:expression) do
 end
 
 Machine.new(
-  Add.new(
-    Multiply.new(Number.new(1), Number.new(2)),
-    Multiply.new(Number.new(3), Number.new(4))
-  )
+  Add.new(Variable.new(:x), Variable.new(:y)),
+  { x: Number.new(3), y: Number.new(4) }
 ).run
