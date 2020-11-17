@@ -1,21 +1,22 @@
 require File.join(File.dirname(__FILE__), 'number')
 require_relative 'variable'
+Dir[File.dirname(__FILE__) + '/statement/*.rb'].each { |file| require file }
 
-Machine = Struct.new(:expression, :environment) do
+Machine = Struct.new(:statement, :environment) do
   def step
-    self.expression = expression.reduce(environment)
+    self.statement, self.environment = statement.reduce(environment)
   end
 
   def run
-    while expression.reducible?
-      puts expression
+    while statement.reducible?
+      puts "#{statement}, #{environment}"
       step
     end
-    puts expression
+    puts "#{statement}, #{environment}"
   end
 end
 
 Machine.new(
-  Add.new(Variable.new(:x), Variable.new(:y)),
-  { x: Number.new(3), y: Number.new(4) }
+  Assign.new(:x, Add.new(Variable.new(:x), Number.new(1))),
+  { x: Number.new(2) }
 ).run
