@@ -1,6 +1,6 @@
-require File.join(File.dirname(__FILE__), 'number')
-require_relative 'variable'
-Dir[File.dirname(__FILE__) + '/statement/*.rb'].each { |file| require file }
+require 'require_all'
+require_all 'expression'
+require_all 'statement'
 
 Machine = Struct.new(:statement, :environment) do
   def step
@@ -17,6 +17,6 @@ Machine = Struct.new(:statement, :environment) do
 end
 
 Machine.new(
-  Assign.new(:x, Add.new(Variable.new(:x), Number.new(1))),
-  { x: Number.new(2) }
+  If.new(Variable.new(:x), Assign.new(:y, Number.new(1)), Assign.new(:y, Number.new(2))),
+  { x: Boolean.new(true) }
 ).run
