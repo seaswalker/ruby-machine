@@ -1,6 +1,7 @@
 require 'require_all'
 require_all 'expression'
 require_all 'statement'
+require_all 'sequence'
 
 Machine = Struct.new(:statement, :environment) do
   def step
@@ -17,6 +18,9 @@ Machine = Struct.new(:statement, :environment) do
 end
 
 Machine.new(
-  If.new(Variable.new(:x), Assign.new(:y, Number.new(1)), Assign.new(:y, Number.new(2))),
-  { x: Boolean.new(true) }
+  While.new(
+    LessThan.new(Variable.new(:x), Number.new(5)),
+    Assign.new(:x, Multiply.new(Variable.new(:x), Number.new(2)))
+  ),
+  { x: Number.new(1) }
 ).run
