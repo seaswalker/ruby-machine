@@ -15,4 +15,12 @@ class Nothing
   def reducible?
     false
   end
+
+  def evaluate(environment)
+    environment
+  end
+
+  def to_ruby
+    '-> e {e}'
+  end
 end

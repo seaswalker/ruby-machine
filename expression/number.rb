@@ -10,6 +10,14 @@ Number = Struct.new(:value) do
   def reducible?
     false
   end
+
+  def evaluate(environment)
+    self
+  end
+
+  def to_ruby
+    "-> e {#{value.inspect}}"
+  end
 end
 
 Add = Struct.new(:left, :right) do
@@ -34,6 +42,14 @@ Add = Struct.new(:left, :right) do
       Number.new(left.value + right.value)
     end
   end
+
+  def evaluate(environment)
+    Number.new(left.evaluate(environment).value + right.evaluate(environment).value)
+  end
+
+  def to_ruby
+    "-> e {(#{left.to_ruby}).call(e) + (#{right.to_ruby}).call(e)}"
+  end
 end
 
 Multiply = Struct.new(:left, :right) do
@@ -57,5 +73,13 @@ Multiply = Struct.new(:left, :right) do
     else
       Number.new(left.value * right.value)
     end
+  end
+
+  def evaluate(environment)
+    Number.new(left.evaluate(environment).value * right.evaluate(environment).value)
+  end
+
+  def to_ruby
+    "-> e {(#{left.to_ruby}).call(e) * (#{right.to_ruby}).call(e)}"
   end
 end

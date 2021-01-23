@@ -10,6 +10,7 @@ rvm install ruby-2.7.2
 gem install require_all
 gem install solargraph
 gem install rubocop
+gem install treetop
 ```
 
 然后vscode中安装插件: 
