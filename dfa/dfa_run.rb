@@ -1,4 +1,6 @@
 require_relative 'dfa_rule_book'
+require_relative 'dfa'
+require_relative 'dfa_design'
 
 rulebook = DFARulebook.new([
                              FARule.new(1, 'a', 2), FARule.new(1, 'b', 1),
@@ -9,3 +11,27 @@ rulebook = DFARulebook.new([
 puts(rulebook.next_state(1, 'a'))
 puts(rulebook.next_state(1, 'b'))
 puts(rulebook.next_state(2, 'b'))
+
+puts(DFA.new(1, [1, 3], rulebook).accepting?)
+puts(DFA.new(1, [3], rulebook).accepting?)
+
+dfa = DFA.new(1, [3], rulebook)
+puts(dfa.accepting?)
+dfa.read_character('b')
+puts(dfa.accepting?)
+3.times { dfa.read_character('a') }
+puts(dfa.accepting?)
+dfa.read_character('b')
+puts(dfa.accepting?)
+
+puts('------------------------')
+dfa = DFA.new(1, [3], rulebook)
+puts(dfa.accepting?)
+dfa.read_string('baaab')
+puts(dfa.accepting?)
+
+puts('-------------------')
+dfa_design = DFADesign.new(1, [3], rulebook)
+puts(dfa_design.accepts?('a'))
+puts(dfa_design.accepts?('baa'))
+puts(dfa_design.accepts?('baba'))
