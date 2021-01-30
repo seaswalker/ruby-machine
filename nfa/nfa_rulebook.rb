@@ -12,4 +12,13 @@ NFARulebook = Struct.new(:rules) do
   def next_states(states, character)
     states.flat_map { |state| follow_rules_for(state, character) }.to_set
   end
+
+  def follow_free_moves(states)
+    more_states = next_states(states, nil)
+    if more_states.subset?(states)
+      states
+    else
+      follow_free_moves(states + more_states)
+    end
+  end
 end
