@@ -12,6 +12,8 @@ gem install require_all
 gem install solargraph
 gem install rubocop
 gem install treetop
+gem install ruby-debug-ide
+gem install debase
 ```
 
 然后vscode中安装插件: 
