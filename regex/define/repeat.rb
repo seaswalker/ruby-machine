@@ -1,13 +1,13 @@
 require_relative 'pattern'
 
-class Empty
+Repeat = Struct.new(:pattern) do
   include Pattern
 
   def to_s
-    ''
+    "#{pattern.bracket(precedence)}*"
   end
 
   def precedence
-    3
+    2
   end
 end

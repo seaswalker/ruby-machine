@@ -1,3 +1,5 @@
+require_relative 'pattern'
+
 Literal = Struct.new(:character) do
   include Pattern
 
