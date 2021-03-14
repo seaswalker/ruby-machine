@@ -1,5 +1,6 @@
 # ruby-machine
-计算的本质代码，环境搭建命令(Mac):
+
+## 环境搭建命令(Mac)
 
 ```bash
 brew install gpg2
@@ -15,3 +16,10 @@ gem install treetop
 
 然后vscode中安装插件: 
 `Ruby`, `Ruby Solargraph`, `ruby-rubocop`
+
+## Debug
+参考：
+[How to debug Ruby code on Visual Studio Code?](https://stackoverflow.com/questions/51539711/how-to-debug-ruby-code-on-visual-studio-code)
+
+具体的debug参数再参考:
+[Launching from VS Code](https://github.com/rubyide/vscode-ruby/wiki/2.-Launching-from-VS-Code)
