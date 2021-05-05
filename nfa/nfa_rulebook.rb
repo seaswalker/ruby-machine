@@ -6,6 +6,7 @@ NFARulebook = Struct.new(:rules) do
   end
 
   def follow_rules_for(state, character)
+    # &:follow的意思是调用FARule的follow方法
     rules_for(state, character).map(&:follow)
   end
 
